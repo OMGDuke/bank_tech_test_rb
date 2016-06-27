@@ -6,24 +6,25 @@ describe Account do
   let (:accounts_array) {[deposit, withdrawal]}
   let(:account_history) { double :account_history, new_transaction: true, transactions: accounts_array }
   let(:account_history_class) { double :account_history_class, new: account_history }
-	subject(:account) {described_class.new(account_history_class)}
 
 	describe '#initialize' do
+    subject(:account) {described_class.new()}
 		it 'has a default balance of £0' do
 			expect(account.balance).to eq(0)
 	  end
 	end
 
   describe '#process_transaction' do
+    subject(:account) {described_class.new(account_history_class)}
     it 'can receive a deposit' do
       account.process_transaction(deposit)
-      expect(account.balance).to eq(50)
+      expect(account.balance).to eq(75)
     end
 
     it 'can receive a withdrawal' do
       account.process_transaction(deposit)
       account.process_transaction(withdrawal)
-      expect(account.balance).to eq(25)
+      expect(account.balance).to eq(50)
     end
 
     it 'adds the transaction to the history' do
@@ -33,6 +34,7 @@ describe Account do
   end
 
   describe '#print_statement' do
+    subject(:account) {described_class.new(account_history_class)}
     it 'prints a statement' do
       account.process_transaction(deposit)
       account.process_transaction(withdrawal)

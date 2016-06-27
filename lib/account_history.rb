@@ -5,7 +5,7 @@ class AccountHistory
 		@transactions = []
 	end
 
-  def new_transaction(transaction)
+  def new_transaction transaction
     @transactions << transaction
   end
 end
