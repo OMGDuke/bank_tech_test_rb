@@ -16,7 +16,6 @@ class Account
   def print_statement
     statement = "date || credit || debit || balance\n"
     statement_balance = @balance
-    p statement_balance
     @account_history.transactions.reverse.each do |transaction|
       if transaction.amount < 0
         statement += "#{transaction.date} || || #{transaction.amount * -1} || #{statement_balance}\n"

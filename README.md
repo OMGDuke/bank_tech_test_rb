@@ -1,5 +1,4 @@
 # Bank Tech Test
-***
 
 ### Installation Instruction
 
