@@ -3,7 +3,8 @@ require 'account'
 describe Account do
   let (:deposit) {double :deposit, amount: 50, date:'27/06/2016' }
   let (:withdrawal) {double :withdrawal, amount: -25, date: '28/06/2016' }
-  let(:account_history) { double :account_history, new_transaction: true }
+  let (:accounts_array) {[deposit, withdrawal]}
+  let(:account_history) { double :account_history, new_transaction: true, transactions: accounts_array }
   let(:account_history_class) { double :account_history_class, new: account_history }
 	subject(:account) {described_class.new(account_history_class)}
 
@@ -33,7 +34,11 @@ describe Account do
 
   describe '#print_statement' do
     it 'prints a statement' do
-      statement = ''
+      account.process_transaction(deposit)
+      account.process_transaction(withdrawal)
+      statement = "date || credit || debit || balance\n" +
+      "28/06/2016 || || 25 || 25\n" +
+      "27/06/2016 || 50 || || 50"
       expect(account.print_statement).to eq(statement)
     end
   end

@@ -22,4 +22,8 @@ class Bank
   def balance(account)
     account.balance
   end
+
+  def print_statement(account)
+    account.print_statement
+  end
 end
