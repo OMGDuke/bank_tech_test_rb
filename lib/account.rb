@@ -4,4 +4,8 @@ class Account
 	def initialize
 		@balance = 0
 	end
+
+  def process_transaction(transaction)
+    @balance += transaction.amount
+  end
 end
